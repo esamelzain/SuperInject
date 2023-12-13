@@ -14,10 +14,43 @@ In your project, use the SuperInject library to automatically register services 
 The `ServiceAttribute` is used to mark classes as services and define their injection type.
 #### ***Constructor***
 - `ServiceAttribute(ServiceLifetime serviceLifetime)`: Creates a new instance of the `ServiceAttribute` with the specified `ServiceLifetime`.
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+using SuperInject.Interfaces;
+using SuperInject;
+
+// Mark your class with the ServiceAttribute
+[Service(ServiceLifetime.Singleton)] // Choose the appropriate ServiceLifetime
+public class MyService : IMyService
+{
+    public void DoSomething()
+    {
+        // Implementation details...
+    }
+}
+```
 ### RepositoryAttribute
 The `RepositoryAttribute` is used to mark classes as repositories and define their injection type.
 #### ***Constructor***
 - `RepositoryAttribute(ServiceLifetime serviceLifetime)`: Creates a new instance of the `RepositoryAttribute` with the specified `ServiceLifetime`.
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+using SuperInject.Interfaces;
+using SuperInject;
+
+// Mark your class with the RepositoryAttribute
+[Repository(ServiceLifetime.Scoped)] // Choose the appropriate ServiceLifetime
+public class MyRepository : IMyRepository
+{
+    public void DoSomething()
+    {
+        // Implementation details...
+    }
+}
+
+```
 ## Extension Method
 ### AddSuperInject
 The **AddSuperInject** extension method simplifies the process of automatically registering services and repositories in the dependency injection container.
