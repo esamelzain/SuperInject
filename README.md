@@ -31,16 +31,17 @@ This method scans the assemblies in the current domain for classes marked with *
 // ConfigureServices method in Startup.cs
 
 public void ConfigureServices(IServiceCollection services)
-```csharp
-{
 
-    // Use AddSuperInject method to automatically register services and repositories
 
-    services.AddSuperInject();
+`{`
 
-     // Your other service registrations go here...
+    `// Use AddSuperInject method to automatically register services and repositories`
 
-} ```
+    `services.AddSuperInject();`
+
+     `// Your other service registrations go here...`
+
+`}`
 
 ## Considerations
 While SuperInject simplifies the dependency injection process, it's essential to be mindful of circular dependencies. Circular dependencies can lead to infinite recursion, and though the library attempts to handle them gracefully, it's advisable to design your application to avoid such scenarios.
