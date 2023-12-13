@@ -8,7 +8,7 @@ namespace SuperInject
     {
         public ServiceLifetime ServiceLifetime { get; }
 
-        public RepositoryAttribute(ServiceLifetime serviceLifetime)
+        public RepositoryAttribute(ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
         {
             ServiceLifetime = serviceLifetime;
         }
