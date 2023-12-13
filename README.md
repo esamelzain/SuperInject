@@ -1,4 +1,4 @@
-**SuperInject NuGet Library**
+##SuperInject NuGet Library
 
 The SuperInject library provides a convenient way to automatically register services and repositories in the Microsoft.Extensions.DependencyInjection container using custom attributes. It simplifies the dependency registration process, allowing developers to annotate their classes with attributes and then automatically register those classes with the dependency injection container.
 ## Getting Started
