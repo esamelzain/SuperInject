@@ -43,7 +43,6 @@ namespace SuperInject.Extensions
             // Register repository first
             if (repositoryAttribute != null)
             {
-                RegisterType(services, implementationType, repositoryAttribute.ServiceLifetime);
 
                 // Check and register dependencies for repositories
                 var constructor = implementationType.GetConstructors().FirstOrDefault();
@@ -52,16 +51,27 @@ namespace SuperInject.Extensions
                 {
                     foreach (var parameter in constructor.GetParameters())
                     {
-                        RegisterServiceOrRepository(services, parameter.ParameterType, processedTypes);
+                        if (parameter.ParameterType.IsInterface)
+                        {
+                            var constructorImplementations = AppDomain.CurrentDomain.GetAssemblies()
+                                                    .SelectMany(s => s.GetTypes())
+                                                    .Where(t => parameter.ParameterType.IsAssignableFrom(t) && t.IsClass);
+                            foreach (var constructorImplementation in constructorImplementations)
+                            {
+                                RegisterServiceOrRepository(services, constructorImplementation, processedTypes);
+                            }
+                        }
+                        else
+                            RegisterServiceOrRepository(services, parameter.ParameterType, processedTypes);
                     }
                 }
+                RegisterType(services, implementationType, repositoryAttribute.ServiceLifetime);
+
             }
 
             // Then register service
             if (serviceAttribute != null)
             {
-                RegisterType(services, implementationType, serviceAttribute.ServiceLifetime);
-
                 // Check and register dependencies for services
                 var constructor = implementationType.GetConstructors().FirstOrDefault();
 
@@ -69,9 +79,21 @@ namespace SuperInject.Extensions
                 {
                     foreach (var parameter in constructor.GetParameters())
                     {
-                        RegisterServiceOrRepository(services, parameter.ParameterType, processedTypes);
+                        if (parameter.ParameterType.IsInterface)
+                        {
+                            var constructorImplementations = AppDomain.CurrentDomain.GetAssemblies()
+                                                    .SelectMany(s => s.GetTypes())
+                                                    .Where(t => parameter.ParameterType.IsAssignableFrom(t) && t.IsClass);
+                            foreach (var constructorImplementation in constructorImplementations)
+                            {
+                                RegisterServiceOrRepository(services, constructorImplementation, processedTypes);
+                            }
+                        }
+                        else
+                            RegisterServiceOrRepository(services, parameter.ParameterType, processedTypes);
                     }
                 }
+                RegisterType(services, implementationType, serviceAttribute.ServiceLifetime);
             }
         }
 
