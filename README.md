@@ -16,8 +16,6 @@ The `ServiceAttribute` is used to mark classes as services and define their inje
 - `ServiceAttribute(ServiceLifetime serviceLifetime)`: Creates a new instance of the `ServiceAttribute` with the specified `ServiceLifetime`.
 
 ```cs
-using Microsoft.Extensions.DependencyInjection;
-using SuperInject.Interfaces;
 using SuperInject;
 
 // Mark your class with the ServiceAttribute
@@ -36,8 +34,6 @@ The `RepositoryAttribute` is used to mark classes as repositories and define the
 - `RepositoryAttribute(ServiceLifetime serviceLifetime)`: Creates a new instance of the `RepositoryAttribute` with the specified `ServiceLifetime`.
 
 ```cs
-using Microsoft.Extensions.DependencyInjection;
-using SuperInject.Interfaces;
 using SuperInject;
 
 // Mark your class with the RepositoryAttribute
