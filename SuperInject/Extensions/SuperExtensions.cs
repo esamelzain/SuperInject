@@ -9,11 +9,28 @@ namespace SuperInject.Extensions
     {
         public static void AddSuperInject(this IServiceCollection services)
         {
-            var types = AppDomain.CurrentDomain.GetAssemblies()
+            var repositoryTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => p.IsClass && (Attribute.IsDefined(p, typeof(ServiceAttribute)) || Attribute.IsDefined(p, typeof(RepositoryAttribute))));
+                .Where(p => p.IsClass && Attribute.IsDefined(p, typeof(RepositoryAttribute)));
 
-            foreach (var type in types)
+            foreach (var type in repositoryTypes)
+            {
+                try
+                {
+                    RegisterServiceOrRepository(services, type, new HashSet<Type>());
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle the exception as needed
+                    Console.WriteLine($"Error registering {type}: {ex.Message}");
+                }
+            }
+
+            var serviceTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => p.IsClass && Attribute.IsDefined(p, typeof(ServiceAttribute)));
+
+            foreach (var type in serviceTypes)
             {
                 try
                 {
@@ -105,13 +122,24 @@ namespace SuperInject.Extensions
             {
                 foreach (var implementedInterface in implementedInterfaces)
                 {
-                    services.Add(new ServiceDescriptor(implementedInterface, implementationType, serviceLifetime));
+                    if (implementedInterface.IsGenericType)
+                    {
+                        // Handle generic interface
+                        var openGenericType = implementedInterface.GetGenericTypeDefinition();
+                        services.Add(new ServiceDescriptor(openGenericType, implementationType, serviceLifetime));
+                    }
+                    else
+                    {
+                        services.Add(new ServiceDescriptor(implementedInterface, implementationType, serviceLifetime));
+                    }
                 }
             }
             else
             {
+                //Generic & Non-generic type without interface
                 services.Add(new ServiceDescriptor(implementationType, implementationType, serviceLifetime));
             }
         }
+
     }
 }

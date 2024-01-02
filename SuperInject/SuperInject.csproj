@@ -4,7 +4,7 @@
 	  <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
 	  <Nullable>enable</Nullable>
 	  <Title>Super Inject</Title>
-	  <Version>2.0.0</Version>
+	  <Version>2.1.0</Version>
 	  <Description>
 		  The SuperInject library provides a convenient way to automatically register services and repositories in the Microsoft.Extensions.DependencyInjection container using custom attributes. 
 		  It simplifies the dependency registration process, allowing developers to annotate their classes with attributes and then automatically register those classes with the dependency injection container.
