@@ -3,23 +3,57 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperInject", "SuperInject\SuperInject.csproj", "{144145C0-2705-47BF-BB06-F4315D7A0E55}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CEE0AB17-DB21-4DD7-A2D3-3FE3BB3EC27D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperInject", "src\SuperInject\SuperInject.csproj", "{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{7F924C30-888C-4C35-A7E9-1976F8EFC900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperInject.Console", "example\SuperInject.Console\SuperInject.Console.csproj", "{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}"
 EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{144145C0-2705-47BF-BB06-F4315D7A0E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{144145C0-2705-47BF-BB06-F4315D7A0E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{144145C0-2705-47BF-BB06-F4315D7A0E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{144145C0-2705-47BF-BB06-F4315D7A0E55}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0C4232B-40B4-4A70-9AEE-DCF0A8EABA43}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Debug|x64.Build.0 = Debug|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Debug|x86.Build.0 = Debug|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Release|x64.ActiveCfg = Release|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Release|x64.Build.0 = Release|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Release|x86.ActiveCfg = Release|Any CPU
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145}.Release|x86.Build.0 = Release|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Debug|x64.Build.0 = Debug|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Debug|x86.Build.0 = Debug|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Release|x64.ActiveCfg = Release|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Release|x64.Build.0 = Release|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Release|x86.ActiveCfg = Release|Any CPU
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4545FB6F-71C8-4F3C-AAEE-79FB0D01A145} = {CEE0AB17-DB21-4DD7-A2D3-3FE3BB3EC27D}
+		{E864E6AD-AB7B-4C9E-B545-B4A3307E6CEB} = {7F924C30-888C-4C35-A7E9-1976F8EFC900}
 	EndGlobalSection
 EndGlobal
