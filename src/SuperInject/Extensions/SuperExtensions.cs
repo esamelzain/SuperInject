@@ -2,11 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace SuperInject.Extensions
 {
     public static class SuperExtensions
     {
+        #region Method
+
         public static void AddSuperInject(this IServiceCollection services)
         {
             var repositoryTypes = AppDomain.CurrentDomain.GetAssemblies()
@@ -43,6 +46,49 @@ namespace SuperInject.Extensions
                 }
             }
         }
+
+        /// <summary>
+        /// Register the superinject service.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        /// <param name="superInjectOptions">SuperInjectOptions as delegate action.</param>
+        /// <exception cref="ArgumentNullException">When failr it thrown ArgumentNullException.</exception>
+        public static void AddSuperInject(this IServiceCollection services, Action<SuperInjectOptions> superInjectOptions)
+        {
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
+
+            if (superInjectOptions == null)
+                throw new ArgumentNullException(nameof(superInjectOptions));
+
+            var opts = new SuperInjectOptions();
+            services.AddSingleton(opts);
+            superInjectOptions?.Invoke(opts);
+
+
+            var serviceTypes = opts.Assemblies.SelectMany(x => x.GetTypes())
+                .Where(p => p.IsClass && Attribute.IsDefined(p, typeof(WithSuperInjectAttribute)));
+
+            if (serviceTypes.Any())
+            {
+                foreach (var type in serviceTypes)
+                {
+                    try
+                    {
+                        RegisterServices(services, type, opts.Assemblies, new HashSet<Type>());
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception as needed
+                        Console.WriteLine($"Error registering {type}: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Utilities
 
         private static void RegisterServiceOrRepository(IServiceCollection services, Type implementationType, HashSet<Type> processedTypes)
         {
@@ -141,5 +187,48 @@ namespace SuperInject.Extensions
             }
         }
 
+        private static void RegisterServices(IServiceCollection services, Type implementationType, Assembly[] assemblies,
+            HashSet<Type> processedTypes)
+        {
+            if (processedTypes.Contains(implementationType))
+            {
+                // Avoid infinite recursion if there's a circular dependency
+                return;
+            }
+
+            processedTypes.Add(implementationType);
+            var withSuperInjectAttr = (WithSuperInjectAttribute?)Attribute.GetCustomAttribute(implementationType, typeof(WithSuperInjectAttribute));
+
+            // Register repository first
+            if (withSuperInjectAttr != null)
+            {
+
+                // Check and register dependencies for repositories
+                var constructor = implementationType.GetConstructors().FirstOrDefault();
+
+                if (constructor != null)
+                {
+                    foreach (var parameter in constructor.GetParameters())
+                    {
+                        if (parameter.ParameterType.IsInterface)
+                        {
+                            var constructorImplementations = assemblies
+                                                    .SelectMany(s => s.GetTypes())
+                                                    .Where(t => parameter.ParameterType.IsAssignableFrom(t) && t.IsClass);
+                            foreach (var constructorImplementation in constructorImplementations)
+                            {
+                                RegisterServices(services, constructorImplementation, assemblies, processedTypes);
+                            }
+                        }
+                        else
+                            RegisterServices(services, parameter.ParameterType, assemblies, processedTypes);
+                    }
+                }
+                RegisterType(services, implementationType, withSuperInjectAttr.ServiceLifetime);
+
+            }
+        }
+
+        #endregion
     }
 }
