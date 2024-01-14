@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\SuperInject\SuperInject.csproj" />
+    <ProjectReference Include="..\..\src\SuperInject\SuperInject.csproj" />
   </ItemGroup>
 
 </Project>
