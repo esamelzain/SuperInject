@@ -1,6 +1,6 @@
 ﻿namespace SuperInject.Console;
 
-[WithSuperInject(Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped)]
+[Service(Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped)]
 public class MyService : IMyService
 {
     public void DoSomething()
