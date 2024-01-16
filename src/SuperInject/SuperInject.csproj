@@ -4,7 +4,7 @@
 	  <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
 	  <Nullable>enable</Nullable>
 	  <Title>Super Inject</Title>
-	  <Version>2.2.0</Version>
+	  <Version>2.2.1</Version>
 	  <Authors>esame lzain</Authors>
 	  <PackageProjectUrl>https://github.com/esamelzain/SuperInject</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/esamelzain/SuperInject</RepositoryUrl>
